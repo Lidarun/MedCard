@@ -1,5 +1,6 @@
 package kg.medcard.nur.config;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,10 +18,14 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
+//                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**").permitAll()
                         .requestMatchers("/", "main").permitAll()
                         .anyRequest().authenticated()
                 )
+                .csrf().disable()
+                .httpBasic()
+                .and()
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()
@@ -34,9 +39,9 @@ public class WebSecurityConfig {
     public UserDetailsService userDetailsService() {
         UserDetails user =
                 User.withDefaultPasswordEncoder()
-                        .username("user")
-                        .password("user")
-                        .roles("USER")
+                        .username("1")
+                        .password("1")
+                        .roles("ADMIN")
                         .build();
 
         return new InMemoryUserDetailsManager(user);

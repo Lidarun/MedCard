@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>User Registered Data</title>
+</head>
+<body>
+<div align="center">
+  <h1>Registered User Information</h1>
+  <div>
+    <p>Email: <strong th:text="${employee.email}"></strong></p>
+    <p>Name: <strong th:text="${employee.name}"></strong></p>
+    <p>Address: <strong th:text="${employee.surname}"></strong></p>
+    <p>Married: <strong th:text="${employee.patronymic}"></strong></p>
+    <p>Password: <strong th:text="${employee.password}"></strong></p>
+    <p>Gender: <strong th:text="${employee.confirmPassword}"></strong></p>
+  </div>
+</div>
+</body>
+</html>
