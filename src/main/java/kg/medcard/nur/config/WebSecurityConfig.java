@@ -23,9 +23,6 @@ public class WebSecurityConfig {
                         .requestMatchers("/", "main").permitAll()
                         .anyRequest().authenticated()
                 )
-                .csrf().disable()
-                .httpBasic()
-                .and()
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()

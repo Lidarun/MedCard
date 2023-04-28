@@ -5,6 +5,7 @@ import kg.medcard.nur.models.Employee;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,12 +24,19 @@ public class DashboardController {
 
     @GetMapping("/register")
     public String register(Model model){
-        model.addAttribute("employee", new Employee());
+        model.addAttribute("employeeForm", new Employee());
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerUser(Model model, @Valid @ModelAttribute Employee employee, BindingResult bindingResult){
+    public String registerUser(@ModelAttribute("employeeForm") @Valid Employee employee,
+                               BindingResult bindingResult , Model model){
+        String err = "Пароли не совпадают";
+
+        if (!employee.getPassword().equals(employee.getConfirmPassword())){
+        ObjectError error = new ObjectError("globalError", err);
+            bindingResult.addError(error);
+        }
         if(bindingResult.hasErrors()) return "register";
 
         model.addAttribute(employee);
