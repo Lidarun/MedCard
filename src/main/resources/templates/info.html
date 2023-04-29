@@ -9,11 +9,12 @@
   <h1>Сотрудник</h1>
   <div>
     <p>Email: <strong th:text="${employee.email}"></strong></p>
-    <p>Name: <strong th:text="${employee.name}"></strong></p>
-    <p>Address: <strong th:text="${employee.surname}"></strong></p>
-    <p>Married: <strong th:text="${employee.patronymic}"></strong></p>
-    <p>Password: <strong th:text="${employee.password}"></strong></p>
-    <p>Gender: <strong th:text="${employee.confirmPassword}"></strong></p>
+    <p>Имя: <strong th:text="${employee.name}"></strong></p>
+    <p>Фамилия: <strong th:text="${employee.surname}"></strong></p>
+    <p>Отчество: <strong th:text="${employee.patronymic}"></strong></p>
+    <p>Пол: <strong th:text="${employee.gender.value}"></strong></p>
+    <p>Дата рождения: <strong th:text="${employee.birthday}"></strong></p>
+    <p>Пароль: <strong th:text="${employee.password}"></strong></p>
   </div>
 </div>
 </body>
