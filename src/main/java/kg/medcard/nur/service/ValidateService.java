@@ -1,4 +1,4 @@
-package kg.medcard.nur.services;
+package kg.medcard.nur.service;
 
 import org.springframework.validation.ObjectError;
 

@@ -1,10 +1,11 @@
 package kg.medcard.nur.web;
 
 import jakarta.validation.Valid;
-import kg.medcard.nur.enums.Gender;
-import kg.medcard.nur.models.Employee;
-import kg.medcard.nur.services.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import kg.medcard.nur.domain.enums.Gender;
+import kg.medcard.nur.domain.model.Employee;
+import kg.medcard.nur.service.EmployeeService;
+import kg.medcard.nur.service.impl.EmployeeServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,19 +15,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 @Controller
 @RequestMapping("/dashboard")
+@RequiredArgsConstructor
 public class DashboardController {
 
-    final EmployeeService employeeService;
-    private Employee empl = new Employee();
-
-    public DashboardController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
+    private final EmployeeService employeeService;
+    private Employee empl = new Employee();//ex
 
     @GetMapping
     public String greeting() {
@@ -55,11 +50,17 @@ public class DashboardController {
         ObjectError error = employeeService.validPassword(employee.getPassword(), employee.getConfirmPassword());
         if (error != null) bindingResult.addError(error);
 
+        if (employeeService.isExists(empl.getEmail())){
+            ObjectError err = new ObjectError("global", "Сотрудник с данным email существует");
+            bindingResult.addError(err);
+        }
+
         if(bindingResult.hasErrors()) return "register";
 
-        model.addAttribute(employee);
+//        model.addAttribute(employee);
         empl = employee;
 
+        employeeService.create(employee);
         return "redirect:/dashboard/info";
     }
 

@@ -1,4 +1,4 @@
-package kg.medcard.nur.enums;
+package kg.medcard.nur.domain.enums;
 
 import lombok.Getter;
 
