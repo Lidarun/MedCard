@@ -94,9 +94,6 @@
 
                     <!--Password-->
                     <label class="block text-sm">
-                        <div th:if="${#fields.hasErrors('global')}">
-                            <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error"/>
-                        </div>
                         <div>
                             <p class="error" th:if="${#fields.hasErrors('password')}" th:errorclass="error"
                                th:errors="*{password}"/>
@@ -116,6 +113,10 @@
                         <i class="far fa-eye" id="togglePassword2" aria-hidden="true"></i>
                     </label>
 
+                    <!--Global errors-->
+                    <div th:if="${#fields.hasErrors('global')}">
+                        <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error"/>
+                    </div>
 
                     <div class="flex mt-6 text-sm">
                         <label class="flex items-center dark:text-gray-400">

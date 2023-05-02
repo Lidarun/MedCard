@@ -45,19 +45,17 @@ public class DashboardController {
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("employeeForm") @Valid Employee employee,
                                BindingResult bindingResult , Model model){
+        model.addAttribute(employee);
         model.addAttribute("value", Gender.values());
 
-        ObjectError error = employeeService.validPassword(employee.getPassword(), employee.getConfirmPassword());
-        if (error != null) bindingResult.addError(error);
+        ObjectError errorEmail = employeeService.existEmployee(employee.getEmail());
+        if (errorEmail != null) bindingResult.addError(errorEmail);
 
-        if (employeeService.isExists(empl.getEmail())){
-            ObjectError err = new ObjectError("global", "Сотрудник с данным email существует");
-            bindingResult.addError(err);
-        }
+        ObjectError errorPassword = employeeService.validPassword(employee.getPassword(), employee.getConfirmPassword());
+        if (errorPassword != null) bindingResult.addError(errorPassword);
 
         if(bindingResult.hasErrors()) return "register";
 
-//        model.addAttribute(employee);
         empl = employee;
 
         employeeService.create(employee);

@@ -21,6 +21,15 @@ public class EmployeeServiceImpl implements ValidateService, EmployeeService {
     }
 
     @Override
+    public ObjectError existEmployee(String email) {
+
+        if (isExists(email))
+                    return new ObjectError
+                            ("global", "Сотрудник с таким email существует");
+        return null;
+    }
+
+    @Override
     public void create(Employee employee) {
         employeeRep.save(employee);
     }
