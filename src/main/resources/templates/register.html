@@ -114,10 +114,13 @@
                     </label>
 
                     <!--Global errors-->
-                    <div th:if="${#fields.hasErrors('global')}">
-                        <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error"/>
-                    </div>
+                    <label class="globalError">
+                        <label th:if="${#fields.hasErrors('global')}">
+                            <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="global"/>
+                        </label>
+                    </label>
 
+                    <!--Privacy Policy-->
                     <div class="flex mt-6 text-sm">
                         <label class="flex items-center dark:text-gray-400">
                             <input type="checkbox"

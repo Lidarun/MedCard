@@ -35,6 +35,7 @@ public class Employee {
     String patronymic;
 
     @NotNull(message = "Укажите пол")
+    @Enumerated(EnumType.ORDINAL)
     Gender gender;
 
     @Past(message = "Неверная дата")

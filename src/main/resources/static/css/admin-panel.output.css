@@ -1688,7 +1688,7 @@ img, video {
 
 .theme-dark .dark\:text-gray-200 {
     --text-opacity: 1;
-    color: #e5e7eb;
+    color: #e7e9ee;
     color: rgba(229, 231, 235, var(--text-opacity))
 }
 
@@ -2071,9 +2071,25 @@ img, video {
     display: block;
     text-align: center;
     font-size: 11px;
-    color: #8f1212;
+    color: #bd1313;
     font-family: Cambria;
     margin-top: 3%;
+}
+
+.globalError{
+    border: 1px solid #dcdbdb;
+    border-radius: 5px;
+    display: block;
+    margin-top: -5%;
+    position: relative;
+    font-size: 15px;
+}
+
+.global{
+    font-size: 13px;
+    font-family: Cambria;
+    color: #bd1313;
+    text-align: center;
 }
 
 .far {
@@ -2091,6 +2107,7 @@ img, video {
 .gender{
     font-size: 14px;
     font-family: "Roboto", sans-serif;
+    color: #929296;
     display: flex;
 }
 .floatBlock{
@@ -2108,4 +2125,8 @@ img, video {
     margin: 4% 0 4% 0;
     width: 55%;
     text-align: center;
+    border-radius: 5px;
+    border: 1px solid white;
+    background-color: #333333;
+    color: #929296;
 }
