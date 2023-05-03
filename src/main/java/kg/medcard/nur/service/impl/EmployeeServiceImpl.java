@@ -8,16 +8,42 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.ObjectError;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Service
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements ValidateService, EmployeeService {
     private final EmployeeRepository employeeRep;
     @Override
-    public ObjectError validPassword(String password, String confirmPassword) {
+    public ObjectError comparePassword(String password, String confirmPassword) {
         ObjectError error = null;
         if (!password.equals(confirmPassword)) error =
-                new ObjectError("global", "Пароли не совпадают");
+                new ObjectError("global", "Пароли не совпадают, попробуйте снова");
+
         return error;
+    }
+
+    @Override
+    public ObjectError validPassword(String password) {
+
+        if (password.isEmpty()) return null;
+
+        String regex = "^(?=.*[0-9])"
+                + "(?=.*[a-z])(?=.*[A-Z])"
+                + "(?=.*[@#$%^&+=])"
+                + "(?=\\S+$).{8,20}$";
+
+        Pattern pattern = Pattern.compile(regex);
+
+        Matcher matcher = pattern.matcher(password);
+
+        if (!matcher.matches())
+            return new ObjectError("global",
+                    "Пароль должен содержать не менее 8-ми символов, " +
+                            "в том числе цифры, прописаные и строчные буквы");
+
+        return null;
     }
 
     @Override

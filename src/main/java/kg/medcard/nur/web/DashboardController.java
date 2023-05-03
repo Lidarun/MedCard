@@ -39,6 +39,7 @@ public class DashboardController {
     public String getInfo(Model model){
         model.addAttribute("value", Gender.values());
         if(empl != null) model.addAttribute(empl);
+        if (empl == null) empl.setGender(Gender.FEMALE);
         return "info";
     }
 
@@ -51,7 +52,11 @@ public class DashboardController {
         ObjectError errorEmail = employeeService.existEmployee(employee.getEmail());
         if (errorEmail != null) bindingResult.addError(errorEmail);
 
-        ObjectError errorPassword = employeeService.validPassword(employee.getPassword(), employee.getConfirmPassword());
+        ObjectError errorConfirmPassword = employeeService
+                .comparePassword(employee.getPassword(), employee.getConfirmPassword());
+        if (errorConfirmPassword != null) bindingResult.addError(errorConfirmPassword);
+
+        ObjectError errorPassword = employeeService.validPassword(employee.getPassword());
         if (errorPassword != null) bindingResult.addError(errorPassword);
 
         if(bindingResult.hasErrors()) return "register";
@@ -61,5 +66,4 @@ public class DashboardController {
         employeeService.create(employee);
         return "redirect:/dashboard/info";
     }
-
 }

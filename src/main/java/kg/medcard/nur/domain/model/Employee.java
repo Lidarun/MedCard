@@ -30,12 +30,12 @@ public class Employee {
     @NotEmpty(message = "Имя не должно быть пустым")
     String name;
 
-    @NotEmpty(message = "Фамилия не должно быть пустым")
+    @NotEmpty(message = "Фамилие не должно быть пустым")
     String surname;
     String patronymic;
 
     @NotNull(message = "Укажите пол")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     Gender gender;
 
     @Past(message = "Неверная дата")

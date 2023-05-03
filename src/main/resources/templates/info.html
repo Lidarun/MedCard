@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>User Registered Data</title>
+    <link th:href="@{/css/info.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-<div align="center">
+<div class="container" align="center">
     <H2>Результат</H2>
     <table>
         <tbody>
@@ -27,24 +29,30 @@
         </tr>
         <tr>
             <td><strong>Пол:</strong></td>
-            <td><span th:text="${employee.gender.value}"></span></td>
+            <td><span th:text="${employee.gender.value}" th:value="${employee.gender}"></span></td>
+<!--            <td><span th:text="${employee != null} ? ${employee.gender.value} : 'user is null'"></span></td>-->
         </tr>
         <tr>
             <td><strong>Дата рождения:</strong></td>
-            <td><span th:text="${employee.birthday.format('dd-MM-yyyy')}"></span></td>
+            <td><span th:text="${employee.birthday}"></span></td>
         </tr>
         <tr>
             <td><strong>Пароль:</strong></td>
             <td><span th:text="${employee.password}"></span></td>
         </tr>
-        <tr>
-            <td colspan="2">&nbsp;<a th:href="@{register}"
-                                     class="btn btn-success"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;
-                новый сотрудник
-            </a></td>
-        </tr>
         </tbody>
     </table>
+
 </div>
+<div class="ui-button" align="center">
+    <button type="button"><i class="fas fa-solid fa-user-plus">
+        <a th:href="@{register}">Новый сотрудник</a></i>
+    </button>
+
+    <button type="button"><i class="fas fa-solid fa-house-user">
+        <a th:href="@{/dashboard}">Офис</a></i>
+    </button>
+</div>
+
 </body>
 </html>
