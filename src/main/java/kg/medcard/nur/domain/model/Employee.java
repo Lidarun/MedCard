@@ -23,6 +23,9 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+//    @Column(nullable = true, length = 64)
+//    String photo;
+
     @NotEmpty(message = "email не должен быть пустым")
     @Email(message = "Пожалуйста, введите действительный адрес электронной почты")
     String email;

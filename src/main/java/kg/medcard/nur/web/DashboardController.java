@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import kg.medcard.nur.domain.enums.Gender;
 import kg.medcard.nur.domain.model.Employee;
 import kg.medcard.nur.service.EmployeeService;
-import kg.medcard.nur.service.impl.EmployeeServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/dashboard")
@@ -23,8 +23,10 @@ public class DashboardController {
     private final EmployeeService employeeService;
     private Employee empl = new Employee();//ex
 
+    //GET
     @GetMapping
-    public String greeting() {
+    public String showDashboard(Model model) {
+        model.addAttribute("employees", employeeService.findAll());
         return "dashboard";
     }
 
@@ -43,6 +45,13 @@ public class DashboardController {
         return "info";
     }
 
+//    @GetMapping()
+//    public String getAllEmployees(Model model) {
+//        model.addAttribute("employees", employeeService.findAll());
+//        return "dashboard";
+//    }
+
+    //POST
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("employeeForm") @Valid Employee employee,
                                BindingResult bindingResult , Model model){
@@ -66,4 +75,5 @@ public class DashboardController {
         employeeService.create(employee);
         return "redirect:/dashboard/info";
     }
+
 }

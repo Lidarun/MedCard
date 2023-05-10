@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.ObjectError;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,6 +64,11 @@ public class EmployeeServiceImpl implements ValidateService, EmployeeService {
     @Override
     public boolean isExists(String email) {
         return employeeRep.existsByEmail(email);
+    }
+
+    @Override
+    public List<Employee> findAll() {
+        return employeeRep.findAll();
     }
 
 
